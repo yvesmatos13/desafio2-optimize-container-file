@@ -18,12 +18,12 @@ ENV DOCROOT=/var/www/html
 #SOLUCAO - ALTERADO
 #RUN em apenas única linha. Troque a palavra RUN por &&
 RUN yum install -y --disableplugin=subscription-manager httpd && yum clean all --disableplugin=subscription-manager -y
-
+RUN mkdir -p ${DOCROOT}
 RUN  echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
 
 # Allows child images to inject their own content into DocumentRoot
 #SOLUCAO - ALTERADO
-ONBUILD COPY src /${DOCROOT}/
+ONBUILD COPY src/ ${DOCROOT}/
 
 EXPOSE 8080
 
